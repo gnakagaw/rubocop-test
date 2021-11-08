@@ -1,0 +1,7 @@
+require: ./rescue_in_transaction_cop.rb
+
+AllCops:
+  DisabledByDefault: true
+
+Lint/RescueInTransaction:
+  Enabled: true
