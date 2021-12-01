@@ -8,7 +8,7 @@ class RuboCop::Cop::Lint::RescueInTransaction < RuboCop::Cop::Base
     )
   PATTERN
   
-  MSG = 'Avoid the use of `rescue` in a `ApplicationRecord.transaction` block'.freeze
+  MSG = 'Avoid the use of `rescue` in a `transaction` block'.freeze
   
   def on_block(node)
     return unless violate?(node)
