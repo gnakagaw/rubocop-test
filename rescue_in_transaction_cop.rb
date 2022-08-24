@@ -1,17 +1,17 @@
 class RuboCop::Cop::Lint::RescueInTransaction < RuboCop::Cop::Base
-  def_node_matcher :rescue_in_transaction_call?, <<~PATTERN
+  def_node_matcher :violate?, <<~PATTERN
     (block
       (send
-        (const nil? :ApplicationRecord) :transaction)
+        _ :transaction)
       (args)
-      {(rescue ...) | (begin ... (kwbegin (rescue ...)))}
+      `(rescue ...)
     )
   PATTERN
-
-  MSG = 'Avoid the use of `rescue` in a `ApplicationRecord.transaction` block'.freeze
+  
+  MSG = 'Avoid the use of `rescue` in a `transaction` block'.freeze
   
   def on_block(node)
-    return unless rescue_in_transaction_call?(node)
+    return unless violate?(node)
     
     add_offense(node)
   end
